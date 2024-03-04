@@ -7,10 +7,9 @@ import java.util.List;
 
 @SpringBootApplication
 public class TasksApplication {
-
 	public static void main(String[] args) {
 		List<Integer> grades = List.of(3, 1, 1, 5, 6, 4);
-		List<Integer> weights = List.of(4, 6, 8, 4, 4, 10);
+		List<Integer> weights = List.of(4, 8, 4, 4, 10);
 
 		try {
 			double weightedAverage = calculateWeightedAverage(grades, weights);
