@@ -21,5 +21,12 @@ public class DbService {
     public Optional<Task> getTaskById(Long id) {
         return repository.findById(id);
     }
+    public boolean deleteTaskById(Long taskId) {
+        if (repository.existsById(taskId)) {
+            repository.deleteById(taskId);
+            return true;
+        }
+        return false;
+    }
 
 }
