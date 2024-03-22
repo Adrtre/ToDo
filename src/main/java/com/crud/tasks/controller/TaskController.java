@@ -23,7 +23,7 @@ public class TaskController {
         List<TaskDto> tasks = taskMapper.mapToTaskDtoList(service.getAllTasks());
         return tasks;
     }
-    @GetMapping("/{taskId}") //  <--- to ta linijka zapmiętja wysłane na adora
+    @GetMapping("/{taskId}")
     public ResponseEntity<TaskDto> getTaskById(@PathVariable("taskId") Long taskId) {
         Optional<Task> taskOptional = service.getTaskById(taskId);
         return taskOptional.map(task -> ResponseEntity.ok(taskMapper.mapToTaskDto(task)))
