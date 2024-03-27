@@ -26,7 +26,7 @@ public class TrelloClient {
     @Value("${trello.app.token}")
     private String trelloToken;
     @Value("${trello.username}")
-    private String trelloUsername; //nazwy użytkownika Trello
+    private String trelloUsername;
 
     public List<TrelloBoardDto> getTrelloBoards() {
         URI url = buildUrl();
@@ -37,7 +37,7 @@ public class TrelloClient {
                 .map(Arrays::asList)
                 .orElse(Collections.emptyList());
     }
-//przeniesienie do metody
+
     private URI buildUrl() {
         return UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/" + trelloUsername + "/boards")
                 .queryParam("key", trelloAppKey)

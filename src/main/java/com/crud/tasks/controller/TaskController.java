@@ -1,4 +1,5 @@
 package com.crud.tasks.controller;
+
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.model.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/tasks")
@@ -20,9 +22,11 @@ public class TaskController {
 
     @GetMapping
     public List<TaskDto> getTasks() {
-        List<TaskDto> tasks = taskMapper.mapToTaskDtoList(service.getAllTasks());
-        return tasks;
+        return service.getAllTasks().stream()
+                .map(taskMapper::mapToTaskDto)
+                .collect(Collectors.toList());
     }
+
     @GetMapping("/{taskId}")
     public ResponseEntity<TaskDto> getTaskById(@PathVariable("taskId") Long taskId) {
         Optional<Task> taskOptional = service.getTaskById(taskId);
@@ -35,6 +39,4 @@ public class TaskController {
         boolean deleted = service.deleteTaskById(taskId);
         return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
-
 }
-
