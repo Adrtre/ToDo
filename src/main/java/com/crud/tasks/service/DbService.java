@@ -28,7 +28,9 @@ public class DbService {
         }
         return false;
     }
-
+    public Task saveTask(Task task) {
+        return repository.save(task);
+    }
 }
 
 
